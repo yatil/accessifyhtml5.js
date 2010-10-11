@@ -13,6 +13,7 @@
  * Acknowledgements: 
  * - @stevefaulkner for his work exploring html5 a11y,
  * - @paddya91 for object notation
+ * - @ginader for reporting typo
  */
 
 
@@ -33,7 +34,7 @@ var fixes = {
 		'role': 'navigation'
 	},
 	'output': {
-		'aria-live': 'pollite'
+		'aria-live': 'polite'
 	},
 	'section': {
 		'role': 'region'

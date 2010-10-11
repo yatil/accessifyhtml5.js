@@ -15,5 +15,6 @@ h2. Acknowledgements:
 
 * @stevefaulkner for his work exploring html5 a11y,
 * @paddya91 for object notation
+* @ginader for reporting typo
 
 This is Open Source and free to use. Attribution is nice to see, but no must. Just use it.
