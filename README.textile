@@ -10,3 +10,10 @@ Just drop into the bottom of your web page:
 Souce: http://www.html5accessibility.com/index-aria.html
 
 Todo: Extend Script for other elements, probably even play with fallback JS for inaccessible audio/video.
+
+h2. Acknowledgements: 
+
+* @stevefaulkner for his work exploring html5 a11y,
+* @paddya91 for object notation
+
+This is Open Source and free to use. Attribution is nice to see, but no must. Just use it.

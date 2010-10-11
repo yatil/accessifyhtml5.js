@@ -10,15 +10,37 @@
  *
  * Todo: Extend Script for other elements, probably even play with fallback JS for inaccessible audio/video.
  *
+ * Acknowledgements: 
+ * - @stevefaulkner for his work exploring html5 a11y,
+ * - @paddya91 for object notation
  */
 
 
-$('header.site').attr('role', 'banner');
-$('footer.site').attr('role', 'contentinfo');
+var fixes = {
+	'header.site': {
+		'role': 'banner'
+	},
+	'footer.site': {
+		'role': 'contentinfo'
+	},
+	'article': {
+		'role': 'article'
+	},
+	'aside': {
+		'aside': 'complementary'
+	},
+	'nav': {
+		'role': 'navigation'
+	},
+	'output': {
+		'aria-live': 'pollite'
+	},
+	'section': {
+		'role': 'region'
+	}
+};
 
-
-$('article').attr('role', 'article');
-$('aside').attr('role', 'complementary');
-$('nav').attr('role', 'navigation');
-$('output').attr('aria-live', 'pollite');
-$('section').attr('role', 'region');
+$.each(fixes,
+function(index, item) {
+	$(index).attr(item);
+});
