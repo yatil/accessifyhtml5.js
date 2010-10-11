@@ -1,0 +1,12 @@
+h1. accessifyhtml5.js
+
+This should probably go into modernizr or something, so see it just as a prototype. It depends on jQuery and was quickly hacked together. Please suggest improvements to @yatil.
+
+It adds ARIA to new elements in browsers which don’t do it by themselves.
+
+Just drop into the bottom of your web page:
+<script src="accessifyhtml5.js"></script>
+
+Souce: http://www.html5accessibility.com/index-aria.html
+
+Todo: Extend Script for other elements, probably even play with fallback JS for inaccessible audio/video.
