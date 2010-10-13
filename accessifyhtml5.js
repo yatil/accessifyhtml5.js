@@ -12,36 +12,40 @@
  *
  * Acknowledgements: 
  * - @stevefaulkner for his work exploring html5 a11y,
- * - @paddya91 for object notation
+ * - @paddya91 for object notation & document ready
  * - @ginader for reporting typo
  */
 
+$(document).ready(function() {
+	
+	var fixes = {
+		'header.site': {
+			'role': 'banner'
+		},
+		'footer.site': {
+			'role': 'contentinfo'
+		},
+		'article': {
+			'role': 'article'
+		},
+		'aside': {
+			'aside': 'complementary'
+		},
+		'nav': {
+			'role': 'navigation'
+		},
+		'output': {
+			'aria-live': 'polite'
+		},
+		'section': {
+			'role': 'region'
+		}
+	};
 
-var fixes = {
-	'header.site': {
-		'role': 'banner'
-	},
-	'footer.site': {
-		'role': 'contentinfo'
-	},
-	'article': {
-		'role': 'article'
-	},
-	'aside': {
-		'aside': 'complementary'
-	},
-	'nav': {
-		'role': 'navigation'
-	},
-	'output': {
-		'aria-live': 'polite'
-	},
-	'section': {
-		'role': 'region'
-	}
-};
-
-$.each(fixes,
-function(index, item) {
-	$(index).attr(item);
+	$.each(fixes,
+		function(index, item) {
+			$(index).attr(item);
+		}
+	);
+	
 });
