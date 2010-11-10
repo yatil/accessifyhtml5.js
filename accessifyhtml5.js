@@ -14,6 +14,7 @@
  * - @stevefaulkner for his work exploring html5 a11y,
  * - @paddya91 for object notation & document ready
  * - @ginader for reporting typo
+ * - @webaxe for reporting an error
  */
 
 $(document).ready(function() {
@@ -22,7 +23,7 @@ $(document).ready(function() {
         'header.site'   : { 'role': 'banner'        },
         'footer.site'   : { 'role': 'contentinfo'   },
         'article'       : { 'role': 'article'       },
-        'aside'         : { 'aside': 'complementary'},
+        'aside'         : { 'role': 'complementary' },
         'nav'           : { 'role': 'navigation'    },
         'output'        : { 'aria-live': 'polite'   },
         'section'       : { 'role': 'region'        },
