@@ -18,4 +18,8 @@ h2. Acknowledgements:
 * @ginader for reporting typo
 * @webaxe for reporting an error
 
+h2. Known Issues:
+
+According to @jkiss, Window-Eyes 7.11 struggles with aria-roles and HTML5, this is nothing I can solve with this script but is a screen reader issue. See: http://ya.tl/aNH1YQ
+
 This is Open Source and free to use. Attribution is nice to see, but no must. Just use it.

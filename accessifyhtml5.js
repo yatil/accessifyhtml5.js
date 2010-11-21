@@ -20,14 +20,14 @@
 $(document).ready(function() {
     
     var fixes = {
-        'header.site'   : { 'role': 'banner'        },
-        'footer.site'   : { 'role': 'contentinfo'   },
-        'article'       : { 'role': 'article'       },
-        'aside'         : { 'role': 'complementary' },
-        'nav'           : { 'role': 'navigation'    },
-        'output'        : { 'aria-live': 'polite'   },
-        'section'       : { 'role': 'region'        },
-        '[required]'    : { 'aria-required': 'true' }
+        'header.site'   : { 'role':          'banner'        },
+        'footer.site'   : { 'role':          'contentinfo'   },
+        'article'       : { 'role':          'article'       },
+        'aside'         : { 'role':          'complementary' },
+        'nav'           : { 'role':          'navigation'    },
+        'output'        : { 'aria-live':     'polite'        },
+        'section'       : { 'role':          'region'        },
+        '[required]'    : { 'aria-required': 'true'          }
     };
 
     $.each(fixes,
