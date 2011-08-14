@@ -2,7 +2,7 @@
  * Accessifyhtml5.js
  * Adds ARIA to new elements in browsers which don’t do it by themselves.
  * Just drop into the bottom of your web page:
- * <script src="accessifyhtml5.js"></script>
+ * <script src="accessifyhtml5.jquery.js"></script>
  *
  * Souce: http://www.html5accessibility.com/index-aria.html
  *
@@ -18,22 +18,21 @@
  * – @divya for the non-jQuery version: https://github.com/paulirish/html5-boilerplate/issues/274#issuecomment-1399875
  */
 
-// Use this format to add to this list: 
-// <selector> | <aria-attribute-name> | <aria-attribute-value>
+$(document).ready(function() {
+    
+    var aria = {
+        'article'       : { 'role':          'article'       },
+        'aside'         : { 'role':          'complementary' },
+        'nav'           : { 'role':          'navigation'    },
+        'output'        : { 'aria-live':     'polite'        },
+        'section'       : { 'role':          'region'        },
+        '[required]'    : { 'aria-required': 'true'          }
+    };
 
-var aria = [
-    'article | role | article',
-    'aside | role | complementary',
-    'nav | role | navigation',
-    'output | aria-live | polite',
-    'section | role | region',
-    '[required] | aria-required | true'
-];
-
-aria.forEach(function(value, index) {
-    var ariarow = value.split(' | ');
-    var elm = document.querySelector(ariarow[0])
-    if (elm) {
-        elm.setAttribute(ariarow[1], ariarow[2]);
-    }
+    $.each(aria,
+        function(index, item) {
+            $(index).attr(item);
+        }
+    );
+    
 });
