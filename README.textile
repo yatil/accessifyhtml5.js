@@ -9,14 +9,21 @@ Just drop into the bottom of your web page:
 
 Souce: http://www.html5accessibility.com/index-aria.html
 
-Todo: Extend Script for other elements, probably even play with fallback JS for inaccessible audio/video.
+ h2. New in this version:
+
+ * Added non-jQuery version (Using querySelector, adds support in IE8+, FF3.5+, Opera 10+, Safari, Chrome as well as iOS, Android and Opera Mobile)
+ * Removed header.site getting role banner and footer.site getting role contentinfo -> If you need to add a class, you can also add the role directly to the HTML
+ * Thanks to @adickson you can just add selectors for banner and contentinfo when calling the function
+ * You’ll now have to call AccessifyHTML5-function like that: @AccessifyHTML5({header:"#header", footer:"#footer"});@
 
 h2. Acknowledgements: 
 
-* @stevefaulkner for his work exploring html5 a11y,
+* @adickson for a really good non-jquery solution
+* @stevefaulkner for his work exploring html5 a11y
 * @paddya91 for object notation
 * @ginader for reporting typo
 * @webaxe for reporting an error
+* @divya for keeping me on track for a non-js solution
 
 h2. Known Issues:
 
