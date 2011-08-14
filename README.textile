@@ -9,12 +9,22 @@ Just drop into the bottom of your web page:
 
 Souce: http://www.html5accessibility.com/index-aria.html
 
- h2. New in this version:
+h2. How to use it (CDN version):
 
- * Added non-jQuery version (Using querySelector, adds support in IE8+, FF3.5+, Opera 10+, Safari, Chrome as well as iOS, Android and Opera Mobile)
- * Removed header.site getting role banner and footer.site getting role contentinfo -> If you need to add a class, you can also add the role directly to the HTML
- * Thanks to @adickson you can just add selectors for banner and contentinfo when calling the function
- * You’ll now have to call AccessifyHTML5-function like that: @AccessifyHTML5({header:"#header", footer:"#footer"});@
+@<script src="//cdn.yatil.net/accessifyhtml5.min.js"></script>
+<script>AccessifyHTML5();</script>@
+
+Or if you use jQuery:
+
+@<script src="//cdn.yatil.net/accessifyhtml5.jquery.min.js"></script>
+<script>AccessifyHTML5();</script>@
+
+h2. New in this version:
+
+* Added non-jQuery version (Using querySelector, adds support in IE8+, FF3.5+, Opera 10+, Safari, Chrome as well as iOS, Android and Opera Mobile)
+* Removed header.site getting role banner and footer.site getting role contentinfo -> If you need to add a class, you can also add the role directly to the HTML
+* Thanks to @adickson you can just add selectors for banner and contentinfo when calling the function
+* You’ll now have to call AccessifyHTML5-function like that: @AccessifyHTML5({header:"#header", footer:"#footer"});@
 
 h2. Acknowledgements: 
 
