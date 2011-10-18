@@ -19,7 +19,7 @@
  * - @paddya91 for object notation & document ready
  * - @ginader for reporting typo
  * - @webaxe for reporting an error
- * – @divya for keeping me on track for a non-js solution
+ * – @divya for keeping me on track for a non-jQuery solution
  */
 
 var AccessifyHTML5 = function (defaults) {

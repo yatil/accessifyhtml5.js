@@ -33,7 +33,7 @@ h2. Acknowledgements:
 * @paddya91 for object notation
 * @ginader for reporting typo
 * @webaxe for reporting an error
-* @divya for keeping me on track for a non-js solution
+* @divya for keeping me on track for a non-jQuery solution
 
 h2. Known Issues:
 
