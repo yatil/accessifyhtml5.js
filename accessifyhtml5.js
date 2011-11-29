@@ -23,7 +23,7 @@
 */
 
 var AccessifyHTML5 = function (defaults) {
-    if(document.querySelectorAll) {
+    if (document.querySelectorAll) {
         var fixes = {
             'article'   :    {'role':  'article'       },
             'aside'     :    {'role':  'complementary' },
@@ -46,11 +46,11 @@ var AccessifyHTML5 = function (defaults) {
             }
         }
 
-        for (fix in fixes) {
+        for (var fix in fixes) {
 
             var elems = document.querySelectorAll(fix),
                 obj = fixes[fix],
-                attr, value, i = 0;
+                attr, value, key, i = 0;
 
             for (key in obj) {
                 attr = key;
