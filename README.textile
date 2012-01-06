@@ -34,6 +34,7 @@ h2. Acknowledgements:
 * @ginader for reporting typo
 * @webaxe for reporting an error
 * @divya for keeping me on track for a non-jQuery solution
+* @mathias for improving my javascript
 
 h2. Known Issues:
 
