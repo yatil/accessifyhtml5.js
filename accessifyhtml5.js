@@ -22,7 +22,7 @@
  * – @divya for keeping me on track for a non-jQuery solution
 */
 
-AccessifyHTML5 = function (defaults) {
+var AccessifyHTML5 = function (defaults) {
 var accessified, selector, elements, ARIAobject, ARIAattr, attr, value, i
 
     if (document.querySelectorAll) {
