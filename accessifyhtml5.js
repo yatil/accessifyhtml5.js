@@ -22,9 +22,11 @@
  * – @divya for keeping me on track for a non-jQuery solution
 */
 
-var AccessifyHTML5 = function (defaults) {
+AccessifyHTML5 = function (defaults) {
+var accessified, selector, elements, ARIAobject, ARIAattr, attr, value, i
+
     if (document.querySelectorAll) {
-        var fixes = {
+        accessified = {
             'article'   :    {'role':  'article'       },
             'aside'     :    {'role':  'complementary' },
             'nav'       :    {'role':  'navigation'    },
@@ -32,33 +34,27 @@ var AccessifyHTML5 = function (defaults) {
             'section'   :    {'role':  'region'        },
             '[required]':    {'aria-required': 'true'  }
         };
-		
-        if (defaults) {
-            if (defaults.header) {
-                fixes[defaults.header] = {
-                    'role': 'banner'
-                };
-            }
-            if (defaults.footer) {
-                fixes[defaults.footer] = {
-                    'role': 'contentinfo'
-                }
-            }
+
+        if (defaults && defaults.header) {
+            accessified[defaults.header] = { 'role': 'banner' }
+        }
+        if (defaults && defaults.footer) {
+            accessified[defaults.footer] = { 'role': 'contentinfo' }
         }
 
-        for (var fix in fixes) {
+        for (selector in accessified) {
 
-            var elems = document.querySelectorAll(fix),
-                obj = fixes[fix],
-                attr, value, key, i = 0;
+            elements   = document.querySelectorAll(selector),
+            ARIAobject = accessified[selector],
+            i = 0;
 
-            for (key in obj) {
-                attr = key;
-                value = obj[key];
+            for (ARIAattr in ARIAobject) {
+                attr  = ARIAattr;
+                value = ARIAobject[ARIAattr];
             }
 
-            for (i; i < elems.length; i++) {
-                elems[i].setAttribute(attr, value);
+            for (i; i < elements.length; i++) {
+                elements[i].setAttribute(attr, value);
             }
 
         }
