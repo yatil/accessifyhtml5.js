@@ -32,7 +32,7 @@ var AccessifyHTML5 = function (defaults) {
             'section'   :    {'role':  'region'        },
             '[required]':    {'aria-required': 'true'  }
         };
-		
+
         if (defaults) {
             if (defaults.header) {
                 fixes[defaults.header] = {

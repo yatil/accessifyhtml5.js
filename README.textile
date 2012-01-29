@@ -26,7 +26,7 @@ h2. New in this version:
 * Thanks to @adickson you can just add selectors for banner and contentinfo when calling the function
 * You’ll now have to call AccessifyHTML5-function like that: @AccessifyHTML5({header:"#header", footer:"#footer"});@
 
-h2. Acknowledgements: 
+h2. Acknowledgements:
 
 * @adickson for a really good non-jquery solution
 * @stevefaulkner for his work exploring html5 a11y
