@@ -13,7 +13,7 @@
  * – You’ll now have to call AccessifyHTML5-function like that
  *   AccessifyHTML5({header:"#header", footer:"#footer"});
  *
- * Acknowledgements: 
+ * Acknowledgements:
  * - @adickson for a really good non-jquery solution
  * - @stevefaulkner for his work exploring html5 a11y
  * - @paddya91 for object notation & document ready
@@ -23,7 +23,7 @@
  */
 
 var AccessifyHTML5 = function (defaults) {
-    
+
     var fixes = {
         'article'       : { 'role':          'article'       },
         'aside'         : { 'role':          'complementary' },
@@ -51,5 +51,5 @@ var AccessifyHTML5 = function (defaults) {
             $(index).attr(item);
         }
     );
-    
+
 };
