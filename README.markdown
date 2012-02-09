@@ -85,7 +85,7 @@ or
 
 ## Known Issues:
 
-* According to @jkiss, Window-Eyes 7.11 struggles with aria-roles and HTML5, this is nothing I can solve with this script but is a screen reader issue. See: http://ya.tl/aNH1YQ
+* According to @jkiss, Window-Eyes 7.11 struggles with aria-roles and HTML5, this is nothing I can solve with this script but is a screen reader issue. See: https://twitter.com/#!/jkiss/status/5488643711967232
 * Firefox adds roles by itself, so this script is not needed for those browsers. I haven’t found a way to detect if those implicit roles are set, so I can’t test that at the moment.
 
 ## License:
