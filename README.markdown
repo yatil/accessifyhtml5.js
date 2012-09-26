@@ -48,14 +48,14 @@ There is a jQuery variant of the script that is a bit smaller, so if you’re us
 I’ve created a small CDN that should serve the JS file quite fast. I recommend to use the code here and copy it into your project’s JS file. Code:
 
 ```html
-<script src="//cdn.yatil.net/accessifyhtml5.min.js"></script>
+<script src="//yatil-cdn.s3.amazonaws.com/accessifyhtml5.min.js"></script>
 <script>AccessifyHTML5();</script>
 ```
 
 or
 
 ```html
-<script src="//cdn.yatil.net/accessifyhtml5.jquery.min.js"></script>
+<script src="//yatil-cdn.s3.amazonaws.com/accessifyhtml5.jquery.min.js"></script>
 <script>AccessifyHTML5();</script>
 ```
 
