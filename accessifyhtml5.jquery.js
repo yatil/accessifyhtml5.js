@@ -6,10 +6,13 @@
 
 var AccessifyHTML5 = function (defaults) {
 
+	"use strict";
+
 	var fixes = {
 		'article'       : { 'role':          'article'       },
 		'aside'         : { 'role':          'complementary' },
 		'nav'           : { 'role':          'navigation'    },
+		'main'          : { 'role':          'main'          },
 		'output'        : { 'aria-live':     'polite'        },
 		'section'       : { 'role':          'region'        },
 		'[required]'    : { 'aria-required': 'true'          }
@@ -24,18 +27,21 @@ var AccessifyHTML5 = function (defaults) {
 		if (defaults.footer) {
 			fixes[defaults.footer] = {
 				'role': 'contentinfo'
-			}
+			};
 		}
 		if (defaults.main) {
 			fixes[defaults.main] = {
 				'role': 'main'
-			}
+			};
+			fixes.main = {
+				'role': ''
+			};
 		}
 	}
 
 	$.each(fixes,
 		function(index, item) {
-			$(index).attr(item);
+			$(index).not('[' + item[0] +']').attr(item);
 		}
 	);
 

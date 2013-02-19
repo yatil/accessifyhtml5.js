@@ -5,51 +5,62 @@
  */
 
 var AccessifyHTML5 = function (defaults) {
-	if (document.querySelectorAll) {
-		var fixes = {
-			'article'   :    {'role':          'article'       },
-			'aside'     :    {'role':          'complementary' },
-			'nav'       :    {'role':          'navigation'    },
-			'output'    :    {'aria-live':     'polite'        },
-			'section'   :    {'role':          'region'        },
-			'[required]':    {'aria-required': 'true'          }
-		};
 
-		if (defaults) {
-			if (defaults.header) {
-				fixes[defaults.header] = {
-					'role': 'banner'
-				};
-			}
-			if (defaults.footer) {
-				fixes[defaults.footer] = {
-					'role': 'contentinfo'
-				}
-			}
-			if (defaults.main) {
-				fixes[defaults.main] = {
-					'role': 'main'
-				}
-			}
-		}
+  "use strict";
 
-		for (var fix in fixes) {
+  if (document.querySelectorAll) {
+    var fixes = {
+      'article'   :    {'role':          'article'       },
+      'aside'     :    {'role':          'complementary' },
+      'nav'       :    {'role':          'navigation'    },
+      'main'      :    {'role':          'main'          },
+      'output'    :    {'aria-live':     'polite'        },
+      'section'   :    {'role':          'region'        },
+      '[required]':    {'aria-required': 'true'          }
+    };
 
-			var elems = document.querySelectorAll(fix),
-			    obj = fixes[fix],
-			    attr, value, key, i = 0;
+    if (defaults) {
+      if (defaults.header) {
+        fixes[defaults.header] = {
+          'role': 'banner'
+        };
+      }
+      if (defaults.footer) {
+        fixes[defaults.footer] = {
+          'role': 'contentinfo'
+        };
+      }
+      if (defaults.main) {
+        fixes[defaults.main] = {
+          'role': 'main'
+        };
+        fixes.main = {
+          'role': ''
+        };
+      }
+    }
 
-			for (key in obj) {
-				attr = key;
-				value = obj[key];
-			}
+    for (var fix in fixes) {
+      if(fix.hasOwnProperty(fixes)){
 
-			for (i; i < elems.length; i++) {
-				if (!elems[i].hasAttribute(attr)) {
-					elems[i].setAttribute(attr, value);
-				};
-			}
+        var elems = document.querySelectorAll(fix),
+                              obj = fixes[fix],
+                              attr, value, key, i = 0;
 
-		}
-	}
+        for (key in obj) {
+          if(key.hasOwnProperty(obj)){
+            attr = key;
+            value = obj[key];
+          }
+        }
+
+        for (i; i < elems.length; i++) {
+          if (!elems[i].hasAttribute(attr)) {
+            elems[i].setAttribute(attr, value);
+          }
+        }
+
+      }
+    }
+  }
 };
