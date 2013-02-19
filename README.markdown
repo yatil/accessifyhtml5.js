@@ -27,7 +27,7 @@ There are some options you’re able to specify as they can be on each web page 
 <script src="accessifyhtml5.js"></script>
 <script>
 	AccessifyHTML5({
-		header:"body>header", 
+		header:"body>header",
 		footer:"body>footer",
 		main: "#main"
 	});
@@ -60,6 +60,10 @@ or
 ```
 
 ## Changelog
+
+### Version 1.5
+
+* Added support for the standard @<main>@ element as specified by the W3C. If you specify your own element for the @main@ role, I reset the @main@ role for the @<main>@ element. (There can’t be more than one element with the role @main@)
 
 ### Version 1.0
 
@@ -94,6 +98,6 @@ This project is [MIT licensed](http://outline.mit-license.org/).
 
 ## Author:
 
-* Eric Eggert 
-* Twitter: @yatil 
+* Eric Eggert
+* Twitter: @yatil
 * Blog: http://yatil.net
