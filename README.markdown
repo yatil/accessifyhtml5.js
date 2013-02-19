@@ -63,7 +63,7 @@ or
 
 ### Version 1.5
 
-* Added support for the standard @<main>@ element as specified by the W3C. If you specify your own element for the @main@ role, I reset the @main@ role for the @<main>@ element. (There can’t be more than one element with the role @main@)
+* Added support for the standard `<main>` element as specified by the W3C. If you specify your own element for the `main` role, I reset the `main` role for the `<main>` element. (There can’t be more than one element with the role `main`.)
 
 ### Version 1.0
 
@@ -75,7 +75,7 @@ or
 * Added non-jQuery version (Using querySelector, adds support in IE8+, FF3.5+, Opera 10+, Safari, Chrome as well as iOS, Android and Opera Mobile)
 * Removed header.site getting role banner and footer.site getting role contentinfo -> If you need to add a class, you can also add the role directly to the HTML
 * Thanks to @adickson you can just add selectors for banner and contentinfo when calling the function
-* You’ll now have to call AccessifyHTML5-function like that: @AccessifyHTML5({header:"#header", footer:"#footer"});@
+* You’ll now have to call AccessifyHTML5-function like that: `AccessifyHTML5({header:"#header", footer:"#footer"});`
 
 ## Acknowledgements:
 
