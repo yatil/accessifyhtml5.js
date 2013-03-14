@@ -41,14 +41,14 @@ var AccessifyHTML5 = function (defaults) {
     }
 
     for (var fix in fixes) {
-      if(fix.hasOwnProperty(fixes)){
+      if (fixes.hasOwnProperty(fix)) {
 
         var elems = document.querySelectorAll(fix),
                               obj = fixes[fix],
                               attr, value, key, i = 0;
 
         for (key in obj) {
-          if(key.hasOwnProperty(obj)){
+          if (obj.hasOwnProperty(key)) {
             attr = key;
             value = obj[key];
           }
