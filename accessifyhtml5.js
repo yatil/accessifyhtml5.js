@@ -8,8 +8,7 @@ var AccessifyHTML5 = function (defaults) {
 
   "use strict";
 
-  if (document.querySelectorAll) {
-    var fixes = {
+  var fixes = {
       'article'   :    {'role':          'article'       },
       'aside'     :    {'role':          'complementary' },
       'nav'       :    {'role':          'navigation'    },
@@ -17,7 +16,11 @@ var AccessifyHTML5 = function (defaults) {
       'output'    :    {'aria-live':     'polite'        },
       'section'   :    {'role':          'region'        },
       '[required]':    {'aria-required': 'true'          }
-    };
+  },
+  fix, elems, attr, value, key, obj, i,
+  Doc = document;
+
+  if (Doc.querySelectorAll) {
 
     if (defaults) {
       if (defaults.header) {
@@ -40,21 +43,20 @@ var AccessifyHTML5 = function (defaults) {
       }
     }
 
-    for (var fix in fixes) {
-      if(fix.hasOwnProperty(fixes)){
+    for (fix in fixes) {
+      if (fixes.hasOwnProperty(fix)) {
 
-        var elems = document.querySelectorAll(fix),
-                              obj = fixes[fix],
-                              attr, value, key, i = 0;
+        elems = Doc.querySelectorAll(fix);
+        obj = fixes[fix];
 
         for (key in obj) {
-          if(key.hasOwnProperty(obj)){
+          if (obj.hasOwnProperty(key)) {
             attr = key;
             value = obj[key];
           }
         }
 
-        for (i; i < elems.length; i++) {
+        for (i = 0; i < elems.length; i++) {
           if (!elems[i].hasAttribute(attr)) {
             elems[i].setAttribute(attr, value);
           }

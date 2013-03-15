@@ -1,0 +1,7 @@
+# Specify intentionally untracked files.
+
+Thumbs.db
+.DS_Store
+
+*copy.*
+*error.*
