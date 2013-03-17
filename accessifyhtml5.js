@@ -4,7 +4,7 @@
  * Source: https://github.com/yatil/accessifyhtml5.js
  */
 
-var AccessifyHTML5 = function (defaults) {
+var AccessifyHTML5 = function (defaults, more_fixes) {
 
   "use strict";
 
@@ -17,7 +17,7 @@ var AccessifyHTML5 = function (defaults) {
       'section'   :    {'role':          'region'        },
       '[required]':    {'aria-required': 'true'          }
   },
-  fix, elems, attr, value, key, obj, i,
+  fix, elems, attr, value, key, obj, i, mo,
   Doc = document;
 
   if (Doc.querySelectorAll) {
@@ -43,26 +43,34 @@ var AccessifyHTML5 = function (defaults) {
       }
     }
 
+    for (mo in more_fixes) {
+      fixes[mo] = more_fixes[mo];
+    }
+
     for (fix in fixes) {
       if (fixes.hasOwnProperty(fix)) {
 
         elems = Doc.querySelectorAll(fix);
         obj = fixes[fix];
 
-        for (key in obj) {
-          if (obj.hasOwnProperty(key)) {
-            attr = key;
-            value = obj[key];
-          }
-        }
-
         for (i = 0; i < elems.length; i++) {
-          if (!elems[i].hasAttribute(attr)) {
-            elems[i].setAttribute(attr, value);
+
+          for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+
+              attr = key;
+              value = obj[key];
+
+              if (!elems[i].hasAttribute(attr)) {
+                elems[i].setAttribute(attr, value);
+              }
+
+            }
           }
-        }
+
+        } //End: for (i..elems..i++)
 
       }
-    }
+    } //End: for (fix in fixes)
   }
 };

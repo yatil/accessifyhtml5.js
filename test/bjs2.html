@@ -1,0 +1,96 @@
+<!doctype html><html><title>AccessifyHTML5 test 2: WAI-ARIA roles on HTML 4 elements*</title>
+
+<style>body > *{margin:2em; font-size:1.2em}</style>
+<hr id="page" />
+
+
+<div id="ou-org-header"> Header </div>
+
+<div id="ou-site-header"> Navigation </div>
+
+<div id="ou-region1"> Main content </div>
+
+<input required="" />
+
+<div id="ou-org-footer"> Footer </div>
+
+
+<script src="../accessifyhtml5.js"></script>
+<script>
+AccessifyHTML5(false, {
+  '#ou-org-header': {
+    role: 'banner',
+    'aria-label': 'Site logo'
+  },
+  '#ou-site-header': {
+    role: 'navigation',
+    'aria-label': 'Micro site navigation'
+  },
+  '#ou-region1': {
+    role: 'main',
+    'aria-label': 'Main content'
+  },
+  '#ou-org-footer': {
+    role: 'contentinfo',
+    'aria-label': 'Site links including legal and privacy notices'
+  }
+});
+</script>
+
+
+
+
+<!-- ================================================================
+
+ Unit tests - with Buster.js
+
+-->
+<script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
+<script>
+var q = {};
+buster.testCase("AccessifyHTML5.js test 2 (Buster.JS)", {
+  setUp: function () {
+    q.select = function (selector) {
+      return document.querySelector(selector);
+    };
+    q.selectAll = function (selector) {
+      return document.querySelectorAll(selector);
+    };
+  }
+  , "DOM: `document.querySelectorAll` is a function ().": function () {
+    assert.isFunction( document.querySelectorAll );
+  }
+  , "`window.jQuery` is NOT defined.": function () {
+    refute.defined( window.jQuery );
+  }
+  , "`window.AccessifyHTML5` is a function ().": function () {
+    //NO! assert.isString($("img[src*='__utm.gif']").attr('src'));
+    assert.isFunction( window.AccessifyHTML5 );
+  }
+
+  , "A &lt;div> `#ou-org-header` element exists.": function () {
+    assert.isObject( q.select("#ou-org-header") );
+  }
+  , "Attribute `role` on `#ou-org-header` equals `banner`.": function () {
+    assert.equals(q.select("#ou-org-header").getAttribute("role"), "banner");
+  }
+  , "Attribute `role` on `#ou-site-header` equals `navigation`.": function () {
+    assert.equals(q.select("#ou-site-header").getAttribute("role"), "navigation");
+  }
+  , "`aria-label` on `#ou-site-header` contains the text `navigation`.": function () {
+    assert.match(q.select("#ou-site-header").getAttribute("aria-label"), /navigation/i);
+  }
+  , "Only one element with `role` = `main`.": function () {
+    assert.equals(q.selectAll("[role = main]").length, 1);
+  }
+  , "Only one element with `role` = `banner`.": function () {
+    assert.equals(q.selectAll("[role = banner]").length, 1);
+  }
+  , "An &lt;input> that is `required` has an `aria-required` property.": function () {
+    assert(q.select("input[required]").getAttribute("aria-required"));
+  }
+});
+</script>
+<hr id="test-result" />
+
+</html>
