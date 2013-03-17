@@ -1,0 +1,89 @@
+<!doctype html><html><title>AccessifyHTML5 test 1: WAI-ARIA roles on HTML5 semantic elements</title>
+<!--[if lt IE 9]>
+<script> document.createElement('main') </script>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js"></script>
+<![endif]-->
+
+<style>body > *{margin:2em; font-size:1.2em}</style>
+<hr id="page" />
+
+<header> Header </header>
+
+<nav> Navigation </nav>
+
+<div id="main"> Main content </div>
+
+<section> Section </section>
+
+<article> Article </article>
+
+<aside> Aside </aside>
+
+<input required="" />
+
+<footer> Footer </footer>
+
+
+<script src="../accessifyhtml5.js"></script>
+<script>
+AccessifyHTML5({
+  header: "body > header",
+  footer: "body > footer",
+  main: "#main"
+});
+</script>
+
+
+
+
+<!-- ================================================================
+
+ Unit tests - with Buster.js
+
+-->
+<script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
+<script>
+var q = {};
+buster.testCase("AccessifyHTML5.js tests (Buster.JS)", {
+  setUp: function () {
+    q.select = function (selector) {
+      return document.querySelector(selector);
+    };
+    q.selectAll = function (selector) {
+      return document.querySelectorAll(selector);
+    };
+  }
+  , "DOM: `document.querySelectorAll` is a function ().": function () {
+    assert.isFunction( document.querySelectorAll );
+  }
+  , "`window.jQuery` is NOT defined.": function () {
+    refute.defined( window.jQuery );
+  }
+  , "`window.AccessifyHTML5` is a function ().": function () {
+    //NO! assert.isString($("img[src*='__utm.gif']").attr('src'));
+    assert.isFunction( window.AccessifyHTML5 );
+  }
+
+  , "A &lt;header> element exists.": function () {
+    assert.isObject( q.select("body > header") );
+  }
+  , "Attribute `role` on &lt;header> equals `banner`.": function () {
+    assert.equals(q.select("body > header").getAttribute("role"), "banner");
+  }
+  , "Attribute `role` on &lt;aside> equals `complementary`.": function () {
+    assert.equals(q.select("aside").getAttribute("role"), "complementary");
+  }
+  , "Only one element with `role` = main": function () {
+    assert.equals(q.selectAll("[role = main]").length, 1);
+  }
+  , "Only one element with `role` = banner": function () {
+    assert.equals(q.selectAll("[role = banner]").length, 1);
+  }
+  , "An &lt;input> that is `required` has an `aria-required` property.": function () {
+    assert(q.select("input[required]").getAttribute("aria-required"));
+  }
+});
+</script>
+<hr id="test-result" />
+
+</html>

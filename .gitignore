@@ -3,5 +3,7 @@
 Thumbs.db
 .DS_Store
 
+*.diff
+*.patch
 *copy.*
 *error.*
