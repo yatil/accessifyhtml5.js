@@ -52,7 +52,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     for (fix in fixes) {
       if (fixes.hasOwnProperty(fix)) {
 
-        // Should we catch and report (or ignore) bad selector syntax?
+        //Question: should we catch and report (or ignore) bad selector syntax?
         elems = Doc.querySelectorAll(fix);
         obj = fixes[fix];
 
@@ -64,7 +64,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
               attr = key;
               value = obj[key];
 
-              // Connect up 'aria-labelledby' - do we accept poor spelling, etc.?
+              // Connect up 'aria-labelledby'. //Question: do we accept poor spelling/ variations?
               var by_match = attr.match(/(describe|label)l?edby/);
               if (by_match) {
                 el_label = Doc.querySelector(value); //Not: elems[i].querySel()
