@@ -17,7 +17,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       'section'   :    {'role':          'region'        },
       '[required]':    {'aria-required': 'true'          }
   },
-  fix, elems, attr, value, key, obj, i, mo, el_label,
+  fix, elems, attr, value, key, obj, i, mo, by_match, el_label,
+  ID_PREFIX = "acfy-id-",
   n_label = 0,
   Doc = document;
 
@@ -51,6 +52,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     for (fix in fixes) {
       if (fixes.hasOwnProperty(fix)) {
 
+        // Should we catch and report (or ignore) bad selector syntax?
         elems = Doc.querySelectorAll(fix);
         obj = fixes[fix];
 
@@ -62,18 +64,19 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
               attr = key;
               value = obj[key];
 
-              // Connect up 'aria-labelledby'
-              if (attr.match(/labell?edby/)) {
+              // Connect up 'aria-labelledby' - do we accept poor spelling, etc.?
+              var by_match = attr.match(/(describe|label)l?edby/);
+              if (by_match) {
                 el_label = Doc.querySelector(value); //Not: elems[i].querySel()
 
                 if (! el_label) { continue; /* Warn? */ }
 
                 if (! el_label.id) {
-                  el_label.id = "acfy-label-" + n_label;
+                  el_label.id = ID_PREFIX + n_label;
                 }
 
                 value = el_label.id;
-                attr = 'aria-labelledby';
+                attr = "aria-" + ("label" == by_match[1] ? "labelledby" : "describedby");
 
                 n_label++;
               }
