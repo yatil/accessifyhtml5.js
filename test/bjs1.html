@@ -43,15 +43,17 @@ AccessifyHTML5({
 -->
 <script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
 <script>
-var q = {};
+var q = {
+  // These (may) need to exist after - see bjs2.html::tearDown().
+  select: function (selector) {
+    return document.querySelector(selector);
+  },
+  selectAll: function (selector) {
+    return document.querySelectorAll(selector);
+  }
+};
 buster.testCase("AccessifyHTML5.js tests (Buster.JS)", {
   setUp: function () {
-    q.select = function (selector) {
-      return document.querySelector(selector);
-    };
-    q.selectAll = function (selector) {
-      return document.querySelectorAll(selector);
-    };
   }
   , "DOM: `document.querySelectorAll` is a function ().": function () {
     assert.isFunction( document.querySelectorAll );

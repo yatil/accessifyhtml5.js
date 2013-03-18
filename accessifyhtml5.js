@@ -17,7 +17,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       'section'   :    {'role':          'region'        },
       '[required]':    {'aria-required': 'true'          }
   },
-  fix, elems, attr, value, key, obj, i, mo,
+  fix, elems, attr, value, key, obj, i, mo, el_label,
+  n_label = 0,
   Doc = document;
 
   if (Doc.querySelectorAll) {
@@ -60,6 +61,22 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
               attr = key;
               value = obj[key];
+
+              // Connect up 'aria-labelledby'
+              if (attr.match(/labell?edby/)) {
+                el_label = Doc.querySelector(value); //Not: elems[i].querySel()
+
+                if (! el_label) { continue; /* Warn? */ }
+
+                if (! el_label.id) {
+                  el_label.id = "acfy-label-" + n_label;
+                }
+
+                value = el_label.id;
+                attr = 'aria-labelledby';
+
+                n_label++;
+              }
 
               if (!elems[i].hasAttribute(attr)) {
                 elems[i].setAttribute(attr, value);

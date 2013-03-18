@@ -8,7 +8,7 @@
 
 <div id="ou-site-header"> Navigation </div>
 
-<div id="ou-region1"> Main content </div>
+<div id="ou-region1"><h2>Page title</h2> <p>Main content..</div>
 
 <input required="" />
 
@@ -28,7 +28,7 @@ AccessifyHTML5(false, {
   },
   '#ou-region1': {
     role: 'main',
-    'aria-label': 'Main content'
+    'aria-labelledby': '#ou-region1 h2'
   },
   '#ou-org-footer': {
     role: 'contentinfo',
@@ -47,15 +47,26 @@ AccessifyHTML5(false, {
 -->
 <script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
 <script>
-var q = {};
+var q = {
+  // These need to exist after - see ::tearDown().
+  ex_ID: 'acfy-label-0',
+  select: function (selector) {
+    return document.querySelector(selector);
+  },
+  selectAll: function (selector) {
+    return document.querySelectorAll(selector);
+  }
+};
 buster.testCase("AccessifyHTML5.js test 2 (Buster.JS)", {
   setUp: function () {
-    q.select = function (selector) {
-      return document.querySelector(selector);
-    };
-    q.selectAll = function (selector) {
-      return document.querySelectorAll(selector);
-    };
+  }
+  , tearDown: function () {
+    setTimeout(function() {
+      var x, elx = q.selectAll("li.success i");
+      for (x in elx) {
+        elx[x].innerHTML = q.ex_ID;
+      }
+    }, 200);
   }
   , "DOM: `document.querySelectorAll` is a function ().": function () {
     assert.isFunction( document.querySelectorAll );
@@ -79,6 +90,12 @@ buster.testCase("AccessifyHTML5.js test 2 (Buster.JS)", {
   }
   , "`aria-label` on `#ou-site-header` contains the text `navigation`.": function () {
     assert.match(q.select("#ou-site-header").getAttribute("aria-label"), /navigation/i);
+  }
+  , "`aria-labelledby` on `#ou-region1` equals: <i />": function () {
+    assert.equals(q.select("#ou-region1").getAttribute("aria-labelledby"), q.ex_ID);
+  }
+  , "An &lt;H2> tag exists and has been assigned the ID: <i />": function () {
+    assert.tagName(q.select("#"+q.ex_ID), "h2");
   }
   , "Only one element with `role` = `main`.": function () {
     assert.equals(q.selectAll("[role = main]").length, 1);
