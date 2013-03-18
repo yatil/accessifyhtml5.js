@@ -7,6 +7,7 @@
 <style>body > *{margin:2em; font-size:1.2em}</style>
 <hr id="page" />
 
+
 <header> Header </header>
 
 <nav> Navigation </nav>
@@ -37,14 +38,14 @@ AccessifyHTML5({
 
 
 <!-- ================================================================
+  Unit tests - with Buster.js
 
- Unit tests - with Buster.js
-
+  http://docs.busterjs.org/en/latest/modules/buster-assertions/
 -->
 <script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
 <script>
 var q = {
-  // These (may) need to exist after - see bjs2.html::tearDown().
+  // Utilities: these (may) need to exist after - see bjs2.html::tearDown().
   select: function (selector) {
     return document.querySelector(selector);
   },
@@ -52,7 +53,8 @@ var q = {
     return document.querySelectorAll(selector);
   }
 };
-buster.testCase("AccessifyHTML5.js tests (Buster.JS)", {
+
+buster.testCase("AccessifyHTML5.js test 1: HTML5 (Buster.JS)", {
   setUp: function () {
   }
   , "DOM: `document.querySelectorAll` is a function ().": function () {
@@ -62,12 +64,11 @@ buster.testCase("AccessifyHTML5.js tests (Buster.JS)", {
     refute.defined( window.jQuery );
   }
   , "`window.AccessifyHTML5` is a function ().": function () {
-    //NO! assert.isString($("img[src*='__utm.gif']").attr('src'));
     assert.isFunction( window.AccessifyHTML5 );
   }
-
-  , "A &lt;header> element exists.": function () {
-    assert.isObject( q.select("body > header") );
+  , "A &lt;header> HTML5 element exists.": function () {
+    //Was: assert.isObject( q.select("body > header") );
+    assert.tagName(q.select("body > header"), "header");
   }
   , "Attribute `role` on &lt;header> equals `banner`.": function () {
     assert.equals(q.select("body > header").getAttribute("role"), "banner");
@@ -75,13 +76,13 @@ buster.testCase("AccessifyHTML5.js tests (Buster.JS)", {
   , "Attribute `role` on &lt;aside> equals `complementary`.": function () {
     assert.equals(q.select("aside").getAttribute("role"), "complementary");
   }
-  , "Only one element with `role` = main": function () {
+  , "Only one HTML element with `role` = `main`.": function () {
     assert.equals(q.selectAll("[role = main]").length, 1);
   }
-  , "Only one element with `role` = banner": function () {
+  , "Only one HTML element with `role` = `banner`.": function () {
     assert.equals(q.selectAll("[role = banner]").length, 1);
   }
-  , "An &lt;input> that is `required` has an `aria-required` property.": function () {
+  , "An &lt;input> field that is `required` has an `aria-required` property.": function () {
     assert(q.select("input[required]").getAttribute("aria-required"));
   }
 });

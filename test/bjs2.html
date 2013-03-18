@@ -41,14 +41,14 @@ AccessifyHTML5(false, {
 
 
 <!-- ================================================================
+  Unit tests - with Buster.js
 
- Unit tests - with Buster.js
-
+  http://docs.busterjs.org/en/latest/modules/buster-assertions/
 -->
 <script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
 <script>
 var q = {
-  // These need to exist after - see ::tearDown().
+  // Utilities: these need to exist after - see ::tearDown().
   ex_ID: 'acfy-label-0',
   select: function (selector) {
     return document.querySelector(selector);
@@ -57,17 +57,20 @@ var q = {
     return document.querySelectorAll(selector);
   }
 };
-buster.testCase("AccessifyHTML5.js test 2 (Buster.JS)", {
+
+buster.testCase("AccessifyHTML5.js test 2: HTML 4* (Buster.JS)", {
   setUp: function () {
   }
   , tearDown: function () {
+    // Hack to inject dynamic text.
     setTimeout(function() {
-      var x, elx = q.selectAll("li.success i");
+      var x, elx = q.selectAll(".test-results > li i");
       for (x in elx) {
         elx[x].innerHTML = q.ex_ID;
       }
     }, 200);
   }
+
   , "DOM: `document.querySelectorAll` is a function ().": function () {
     assert.isFunction( document.querySelectorAll );
   }
@@ -75,12 +78,11 @@ buster.testCase("AccessifyHTML5.js test 2 (Buster.JS)", {
     refute.defined( window.jQuery );
   }
   , "`window.AccessifyHTML5` is a function ().": function () {
-    //NO! assert.isString($("img[src*='__utm.gif']").attr('src'));
     assert.isFunction( window.AccessifyHTML5 );
   }
-
-  , "A &lt;div> `#ou-org-header` element exists.": function () {
-    assert.isObject( q.select("#ou-org-header") );
+  , "A &lt;div> HTML element with ID `#ou-org-header` element exists.": function () {
+    //Was: assert.isObject( q.select("#ou-org-header") );
+    assert.tagName(q.select("#ou-org-header"), "div");
   }
   , "Attribute `role` on `#ou-org-header` equals `banner`.": function () {
     assert.equals(q.select("#ou-org-header").getAttribute("role"), "banner");
@@ -88,22 +90,23 @@ buster.testCase("AccessifyHTML5.js test 2 (Buster.JS)", {
   , "Attribute `role` on `#ou-site-header` equals `navigation`.": function () {
     assert.equals(q.select("#ou-site-header").getAttribute("role"), "navigation");
   }
-  , "`aria-label` on `#ou-site-header` contains the text `navigation`.": function () {
+  , "Attribute `aria-label` on `#ou-site-header` contains the text `navigation`.": function () {
     assert.match(q.select("#ou-site-header").getAttribute("aria-label"), /navigation/i);
   }
-  , "`aria-labelledby` on `#ou-region1` equals: <i />": function () {
+  , "Reference `aria-labelledby` on `#ou-region1` equals: \x3Ci>{}\x3C/i>": function () {
     assert.equals(q.select("#ou-region1").getAttribute("aria-labelledby"), q.ex_ID);
   }
-  , "An &lt;H2> tag exists and has been assigned the ID: <i />": function () {
-    assert.tagName(q.select("#"+q.ex_ID), "h2");
+  , "A &lt;h[1-6]> heading tag exists and has been assigned the ID: \x3Ci>{}\x3C/i>": function () {
+    //Was: assert.tagName(q.select("#"+q.ex_ID), "h2");
+    assert.match(q.select("#" + q.ex_ID).tagName, /H[1-6]/i);
   }
-  , "Only one element with `role` = `main`.": function () {
+  , "Only one HTML element with `role` = `main`.": function () {
     assert.equals(q.selectAll("[role = main]").length, 1);
   }
-  , "Only one element with `role` = `banner`.": function () {
+  , "Only one HTML element with `role` = `banner`.": function () {
     assert.equals(q.selectAll("[role = banner]").length, 1);
   }
-  , "An &lt;input> that is `required` has an `aria-required` property.": function () {
+  , "An &lt;input> field that is `required` has an `aria-required` property.": function () {
     assert(q.select("input[required]").getAttribute("aria-required"));
   }
 });
