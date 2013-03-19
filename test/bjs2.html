@@ -1,6 +1,8 @@
 <!doctype html><html><title>AccessifyHTML5 test 2: WAI-ARIA roles on HTML 4 elements*</title>
 
 <style>body > *{margin:2em; font-size:1.2em}</style>
+
+<!--[if IE]><p style="color:red">Sorry, Buster.js tests currently do NOT work with Internet Explorer :(. `AccessifyHTML5()` does though ;)<![endif]-->
 <hr id="page" />
 
 
@@ -20,7 +22,12 @@
 AccessifyHTML5(false, {
   '#ou-org-header': {
     role: 'banner',
-    'aria-label': 'Site logo'
+    'aria-label': 'Site logo',
+
+    "href": "http://example.org",
+    "data-ob_test": { },
+    "data-fn_test": function() { },
+    "data-nm_test": 1
   },
   '#ou-site-header': {
     role: 'navigation',
@@ -45,6 +52,7 @@ AccessifyHTML5(false, {
 
   http://docs.busterjs.org/en/latest/modules/buster-assertions/
 -->
+<!--[if !IE]>-->
 <script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
 <script>
 var q = {
@@ -109,8 +117,15 @@ buster.testCase("AccessifyHTML5.js test 2: HTML 4* (Buster.JS)", {
   , "An &lt;input> field that is `required` has an `aria-required` property.": function () {
     assert(q.select("input[required]").getAttribute("aria-required"));
   }
+  , "A `href` attribute is NOT set - not allowed.": function () {
+    assert.isNull(q.select("#ou-org-header").getAttribute("href"));
+  }
+  , "An attribute of type `object` is NOT set - not allowed.": function () {
+    assert.isNull(q.select("#ou-org-header").getAttribute("data-ob_test"));
+  }
 });
 </script>
 <hr id="test-result" />
+<!--<![endif]-->
 
 </html>

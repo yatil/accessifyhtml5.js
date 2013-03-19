@@ -4,7 +4,9 @@
 <script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js"></script>
 <![endif]-->
 
-<style>body > *{margin:2em; font-size:1.2em}</style>
+<style>body > *{display:block; margin:2em; font-size:1.2em} script{display:none} /*--header,nav,section,aside,footer{ display:block; }--*/</style>
+
+<!--[if IE]><p style="color:red">Sorry, Buster.js tests currently do NOT work with Internet Explorer :(. `AccessifyHTML5()` does though ;)<![endif]-->
 <hr id="page" />
 
 
@@ -42,6 +44,7 @@ AccessifyHTML5({
 
   http://docs.busterjs.org/en/latest/modules/buster-assertions/
 -->
+<!--[if !IE]>-->
 <script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
 <script>
 var q = {
@@ -88,5 +91,6 @@ buster.testCase("AccessifyHTML5.js test 1: HTML5 (Buster.JS)", {
 });
 </script>
 <hr id="test-result" />
+<!--<![endif]-->
 
 </html>
