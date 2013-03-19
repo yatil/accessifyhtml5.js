@@ -23,11 +23,7 @@ AccessifyHTML5(false, {
   '#ou-org-header': {
     role: 'banner',
     'aria-label': 'Site logo',
-
-    "href": "http://example.org",
-    "data-ob_test": { },
-    "data-fn_test": function() { },
-    "data-nm_test": 1
+    'tabindex': 0
   },
   '#ou-site-header': {
     role: 'navigation',
@@ -40,6 +36,16 @@ AccessifyHTML5(false, {
   '#ou-org-footer': {
     role: 'contentinfo',
     'aria-label': 'Site links including legal and privacy notices'
+  },
+
+  // Security tests.
+  "body": {
+    "onload": "alert('Woops!')",
+    "href": "http://example.org",
+    "data-obj_test": { },
+    "data-fun_test": function() { },
+    "data-num_test": 1.2,
+    "data-href": "http://.."
   }
 });
 </script>
@@ -117,11 +123,11 @@ buster.testCase("AccessifyHTML5.js test 2: HTML 4* (Buster.JS)", {
   , "An &lt;input> field that is `required` has an `aria-required` property.": function () {
     assert(q.select("input[required]").getAttribute("aria-required"));
   }
-  , "A `href` attribute is NOT set - not allowed.": function () {
-    assert.isNull(q.select("#ou-org-header").getAttribute("href"));
+  , "Security: an `onload` attribute is NOT set - not allowed.": function () {
+    assert.isNull(q.select("body").getAttribute("onload"));
   }
-  , "An attribute of type `object` is NOT set - not allowed.": function () {
-    assert.isNull(q.select("#ou-org-header").getAttribute("data-ob_test"));
+  , "Security: an attribute of type `object` is NOT set - not allowed.": function () {
+    assert.isNull(q.select("body").getAttribute("data-obj_test"));
   }
 });
 </script>

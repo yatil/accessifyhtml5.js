@@ -18,6 +18,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       '[required]':    {'aria-required': 'true'          }
   },
   fix, elems, attr, value, key, obj, i, mo, by_match, el_label,
+  ATTR_SECURE = /aria-[a-z]+|role|tabindex|title|alt|data|lang|style/,
   ID_PREFIX = "acfy-id-",
   n_label = 0,
   Doc = document;
@@ -63,6 +64,15 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
               attr = key;
               value = obj[key];
+
+              if (!attr.match(ATTR_SECURE)) {
+                //? console.log("Warning: attribute not allowed, ignoring: "+ attr); //Warn?
+                continue;
+              }
+              if (!(typeof value).match(/string|number/)) {
+                //? console.log("Warning: value-type not allowed, ignoring: "+ typeof value); //Warn?
+                continue;
+              }
 
               // Connect up 'aria-labelledby'. //Question: do we accept poor spelling/ variations?
               var by_match = attr.match(/(describe|label)l?edby/);
