@@ -14,11 +14,30 @@
 
 <input required="" />
 
-<div id="ou-org-footer"> Footer </div>
+<div id="ou-org-footer"> <p>Footer </div>
 
 
-<script src="../accessifyhtml5.js"></script>
+<!--
+  Use minified library? Decide at run-time.
+-->
 <script>
+function addScript(js, pos) {
+  var pos = pos ? pos : 'body',
+      h = document.getElementsByTagName(pos)[0],
+      s = document.createElement('script');
+  s.setAttribute('type', 'text/javascript');
+  s.setAttribute('src', js);
+  h.appendChild(s);
+}
+if (document.location.search.match(/min/)) {
+  addScript("../accessifyhtml5.min.js");
+} else {
+  addScript("../accessifyhtml5.js");
+}
+</script>
+<script>
+window.onload = function () {
+
 AccessifyHTML5(false, {
   '#ou-org-header': {
     role: 'banner',
@@ -35,7 +54,8 @@ AccessifyHTML5(false, {
   },
   '#ou-org-footer': {
     role: 'contentinfo',
-    'aria-label': 'Site links including legal and privacy notices'
+    'aria-label': 'Site links including legal and privacy notices',
+    "aria-describedby": "#ou-org-footer p"
   },
 
   // Security tests.
@@ -48,6 +68,8 @@ AccessifyHTML5(false, {
     "data-href": "http://.."
   }
 });
+
+};
 </script>
 
 
@@ -109,6 +131,9 @@ buster.testCase("AccessifyHTML5.js test 2: HTML 4* (Buster.JS)", {
   }
   , "Reference `aria-labelledby` on `#ou-region1` equals: \x3Ci>{}\x3C/i>": function () {
     assert.equals(q.select("#ou-region1").getAttribute("aria-labelledby"), q.ex_ID);
+  }
+  , "Reference `aria-describedby` on `#ou-org-footer` does not equal: `#ou-org-footer p`": function () {
+    refute.equals(q.select("#ou-org-footer").getAttribute("aria-describedby"), "#ou-org-footer p");
   }
   , "A &lt;h[1-6]> heading tag exists and has been assigned the ID: \x3Ci>{}\x3C/i>": function () {
     //Was: assert.tagName(q.select("#"+q.ex_ID), "h2");

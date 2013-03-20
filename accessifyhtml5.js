@@ -75,7 +75,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
               }
 
               // Connect up 'aria-labelledby'. //Question: do we accept poor spelling/ variations?
-              var by_match = attr.match(/(describe|label)l?edby/);
+              var by_match = attr.match(/(describ|label)l?edby/);
               if (by_match) {
                 el_label = Doc.querySelector(value); //Not: elems[i].querySel()
 
