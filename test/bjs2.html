@@ -1,0 +1,158 @@
+<!doctype html><html><meta charset="utf-8"/><title>AccessifyHTML5 test 2: WAI-ARIA roles on HTML 4 elements*</title>
+
+<link rel="stylesheet" href="test.css" />
+
+<!--[if IE]><p class="warn">Sorry, Buster.js tests currently do NOT work with Internet Explorer :(. `AccessifyHTML5()` does though ;)<![endif]-->
+<hr id="page" />
+
+
+<div id="ou-org-header"> Header </div>
+
+<div id="ou-site-header"> Navigation </div>
+
+<div id="ou-region1"><h2>Page title</h2> <p>Main content..</div>
+
+<form><input required="" id="fmtest" /> <input type="submit" /></form>
+
+<div id="ou-org-footer"> <p>Footer </div>
+
+
+<!--
+  Use minified library? Decide at run-time.
+-->
+<script src="accessify-qutils.js"></script>
+<script>
+q.onload(function () {
+
+AccessifyHTML5(false, {
+  '#ou-org-header': {
+    role: 'banner',
+    'aria-label': 'Site logo',
+    'tabindex': 0
+  },
+  '#ou-site-header': {
+    role: 'navigation',
+    'aria-label': 'Micro site navigation'
+  },
+  '#ou-region1': {
+    role: 'main',
+    'aria-labelledby': '#ou-region1 h2'
+  },
+  '#ou-org-footer': {
+    role: 'contentinfo',
+    'aria-label': 'Site links including legal and privacy notices',
+    "aria-describedby": "#ou-org-footer p"
+  },
+
+  "input#fmtest": {
+    "type": "email",
+    "placeholder": "you@example.org",
+    "maxlength": 20,
+    "title": "Email input field - required",
+    "style": "cursor:help"
+  },
+
+  // Security tests.
+  "body": {
+    "onload": "alert('Woops!')",
+    "href": "http://example.org",
+    "data-obj_test": { },
+    "data-fun_test": function() { },
+    "data-num_test": 1.2,
+    "data-href": "http://.."
+  }
+});
+
+});
+</script>
+
+
+
+
+<!-- ================================================================
+  Unit tests - with Buster.js
+
+  http://docs.busterjs.org/en/latest/modules/buster-assertions/
+-->
+<!--[if !IE]>-->
+<script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
+<script>
+q.ex_ID = 'acfy-id-0';
+
+
+q.onload(function () {
+
+buster.testCase("AccessifyHTML5.js test 2: HTML 4* (Buster.JS)", {
+  setUp: function () {
+  }
+  , tearDown: function () {
+    // Hack to inject dynamic text.
+    setTimeout(function() {
+      var x, elx = q.selectAll(".test-results > li i");
+      for (x in elx) {
+        elx[x].innerHTML = q.ex_ID;
+      }
+    }, 200);
+  }
+
+  , "DOM: `document.querySelectorAll` is a function ().": function () {
+    assert.isFunction( document.querySelectorAll );
+  }
+  , "`window.jQuery` is NOT defined.": function () {
+    refute.defined( window.jQuery );
+  }
+  , "`window.AccessifyHTML5` is a function ().": function () {
+    assert.isFunction( window.AccessifyHTML5 );
+  }
+  , "A &lt;div> HTML element with ID `#ou-org-header` element exists.": function () {
+    //Was: assert.isObject( q.select("#ou-org-header") );
+    assert.tagName(q.select("#ou-org-header"), "div");
+  }
+  , "Attribute `role` on `#ou-org-header` equals `banner`.": function () {
+    assert.equals(q.select("#ou-org-header").getAttribute("role"), "banner");
+  }
+  , "Attribute `role` on `#ou-site-header` equals `navigation`.": function () {
+    assert.equals(q.select("#ou-site-header").getAttribute("role"), "navigation");
+  }
+  , "Attribute `aria-label` on `#ou-site-header` contains the text `navigation`.": function () {
+    assert.match(q.select("#ou-site-header").getAttribute("aria-label"), /navigation/i);
+  }
+  , "Reference `aria-labelledby` on `#ou-region1` equals: \x3Ci>{}\x3C/i>": function () {
+    assert.equals(q.select("#ou-region1").getAttribute("aria-labelledby"), q.ex_ID);
+  }
+  , "Reference `aria-describedby` on `#ou-org-footer` does not equal: `#ou-org-footer p`": function () {
+    refute.equals(q.select("#ou-org-footer").getAttribute("aria-describedby"), "#ou-org-footer p");
+  }
+  , "A &lt;h[1-6]> heading tag exists and has been assigned the ID: \x3Ci>{}\x3C/i>": function () {
+    //Was: assert.tagName(q.select("#"+q.ex_ID), "h2");
+    assert.match(q.select("#" + q.ex_ID).tagName, /H[1-6]/i);
+  }
+  , "Only one HTML element with `role` = `main`.": function () {
+    assert.equals(q.selectAll("[role = main]").length, 1);
+  }
+  , "Only one HTML element with `role` = `banner`.": function () {
+    assert.equals(q.selectAll("[role = banner]").length, 1);
+  }
+  , "An &lt;input> field that is `required` has an `aria-required` property.": function () {
+    assert(q.select("input[required]").getAttribute("aria-required"));
+  }
+  , "An &lt;input> field with `type` = `email`.": function () {
+    assert.equals(q.select("input").getAttribute("type"), "email");
+  }
+  , "Security: an `onload` attribute is NOT set - not allowed.": function () {
+    assert.isNull(q.select("body").getAttribute("onload"));
+  }
+  , "Security: an attribute of type `object` is NOT set - not allowed.": function () {
+    assert.isNull(q.select("body").getAttribute("data-obj_test"));
+  }
+});
+
+});
+</script>
+<hr id="test-result" />
+<!--<![endif]-->
+
+
+<a href="https://github.com/yatil/accessifyhtml5.js"
+  class="g" title="Fork me on Github"></a>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html><html><title>AccessifyHTML5 test 1: WAI-ARIA roles on HTML5 semantic elements</title>
+<!--[if lt IE 9]>
+<script> document.createElement('main') </script>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="test.css" />
+
+<!--[if IE]><p class="warn">Sorry, Buster.js tests currently do NOT work with Internet Explorer :(. `AccessifyHTML5()` does though ;)<![endif]-->
+<hr id="page" />
+
+
+<header> Header </header>
+
+<nav> Navigation </nav>
+
+<div id="main"> Main content </div>
+
+<section> Section </section>
+
+<article> Article </article>
+
+<aside> Aside </aside>
+
+<input required="" />
+
+<footer> Footer </footer>
+
+
+<script src="../accessifyhtml5.js"></script>
+<script>
+AccessifyHTML5({
+  header: "body > header",
+  footer: "body > footer",
+  main: "#main"
+});
+</script>
+
+
+
+
+<!-- ================================================================
+  Unit tests - with Buster.js
+
+  http://docs.busterjs.org/en/latest/modules/buster-assertions/
+-->
+<!--[if !IE]>-->
+<script src="http://cdn.busterjs.org/releases/0.6.2/buster-test.js"></script>
+<script>
+var q = {
+  // Utilities: these (may) need to exist after - see bjs2.html::tearDown().
+  select: function (selector) {
+    return document.querySelector(selector);
+  },
+  selectAll: function (selector) {
+    return document.querySelectorAll(selector);
+  }
+};
+
+buster.testCase("AccessifyHTML5.js test 1: HTML5 (Buster.JS)", {
+  setUp: function () {
+  }
+  , "DOM: `document.querySelectorAll` is a function ().": function () {
+    assert.isFunction( document.querySelectorAll );
+  }
+  , "`window.jQuery` is NOT defined.": function () {
+    refute.defined( window.jQuery );
+  }
+  , "`window.AccessifyHTML5` is a function ().": function () {
+    assert.isFunction( window.AccessifyHTML5 );
+  }
+  , "A &lt;header> HTML5 element exists.": function () {
+    //Was: assert.isObject( q.select("body > header") );
+    assert.tagName(q.select("body > header"), "header");
+  }
+  , "Attribute `role` on &lt;header> equals `banner`.": function () {
+    assert.equals(q.select("body > header").getAttribute("role"), "banner");
+  }
+  , "Attribute `role` on &lt;aside> equals `complementary`.": function () {
+    assert.equals(q.select("aside").getAttribute("role"), "complementary");
+  }
+  , "Only one HTML element with `role` = `main`.": function () {
+    assert.equals(q.selectAll("[role = main]").length, 1);
+  }
+  , "Only one HTML element with `role` = `banner`.": function () {
+    assert.equals(q.selectAll("[role = banner]").length, 1);
+  }
+  , "An &lt;input> field that is `required` has an `aria-required` property.": function () {
+    assert(q.select("input[required]").getAttribute("aria-required"));
+  }
+});
+</script>
+<hr id="test-result" />
+<!--<![endif]-->
+
+<a href="https://github.com/yatil/accessifyhtml5.js"
+  class="g" title="Fork me on Github"></a>
+</html>
