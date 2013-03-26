@@ -1,8 +1,8 @@
 <!doctype html><html><meta charset="utf-8"/><title>AccessifyHTML5 test 2: WAI-ARIA roles on HTML 4 elements*</title>
 
-<style>body > *{margin:2em; font-size:1.2em} input{font-size:1em}</style>
+<link rel="stylesheet" href="test.css" />
 
-<!--[if IE]><p style="color:red">Sorry, Buster.js tests currently do NOT work with Internet Explorer :(. `AccessifyHTML5()` does though ;)<![endif]-->
+<!--[if IE]><p class="warn">Sorry, Buster.js tests currently do NOT work with Internet Explorer :(. `AccessifyHTML5()` does though ;)<![endif]-->
 <hr id="page" />
 
 
@@ -136,6 +136,9 @@ buster.testCase("AccessifyHTML5.js test 2: HTML 4* (Buster.JS)", {
   , "An &lt;input> field that is `required` has an `aria-required` property.": function () {
     assert(q.select("input[required]").getAttribute("aria-required"));
   }
+  , "An &lt;input> field with `type` = `email`.": function () {
+    assert.equals(q.select("input").getAttribute("type"), "email");
+  }
   , "Security: an `onload` attribute is NOT set - not allowed.": function () {
     assert.isNull(q.select("body").getAttribute("onload"));
   }
@@ -149,4 +152,7 @@ buster.testCase("AccessifyHTML5.js test 2: HTML 4* (Buster.JS)", {
 <hr id="test-result" />
 <!--<![endif]-->
 
+
+<a href="https://github.com/yatil/accessifyhtml5.js"
+  class="g" title="Fork me on Github"></a>
 </html>

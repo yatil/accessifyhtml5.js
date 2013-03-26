@@ -1,0 +1,19 @@
+/*
+ AccessifyHTML5.js - test styles.
+*/
+body > * {
+  display:block; margin:2em; font-size:1.2em;
+}
+/*--header,nav,section,aside,footer{ display:block; }--*/
+script { display:none; } 
+input { font-size:1em; }
+.warn { color:red; }
+.buster-test h1 { font-size:1.9em !important; }
+a.g[href *= "github.com"] {
+position:absolute; top:-40px; right:-38px; border:1px dotted transparent;
+display:block; width:0; padding-left:148px; height:148px; z-index:10; overflow:hidden;
+background:url(https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png) no-repeat;
+}
+a.g:hover, a.g:focus {
+  border-color:#999; border-radius:16px;
+}
