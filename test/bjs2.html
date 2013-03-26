@@ -1,6 +1,6 @@
 <!doctype html><html><meta charset="utf-8"/><title>AccessifyHTML5 test 2: WAI-ARIA roles on HTML 4 elements*</title>
 
-<style>body > *{margin:2em; font-size:1.2em}</style>
+<style>body > *{margin:2em; font-size:1.2em} input{font-size:1em}</style>
 
 <!--[if IE]><p style="color:red">Sorry, Buster.js tests currently do NOT work with Internet Explorer :(. `AccessifyHTML5()` does though ;)<![endif]-->
 <hr id="page" />
@@ -12,7 +12,7 @@
 
 <div id="ou-region1"><h2>Page title</h2> <p>Main content..</div>
 
-<input required="" />
+<form><input required="" id="fmtest" /> <input type="submit" /></form>
 
 <div id="ou-org-footer"> <p>Footer </div>
 
@@ -42,6 +42,14 @@ AccessifyHTML5(false, {
     role: 'contentinfo',
     'aria-label': 'Site links including legal and privacy notices',
     "aria-describedby": "#ou-org-footer p"
+  },
+
+  "input#fmtest": {
+    "type": "email",
+    "placeholder": "you@example.org",
+    "maxlength": 20,
+    "title": "Email input field - required",
+    "style": "cursor:help"
   },
 
   // Security tests.

@@ -18,7 +18,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       '[required]':    {'aria-required': 'true'          }
   },
   fix, elems, attr, value, key, obj, i, mo, by_match, el_label,
-  ATTR_SECURE = /aria-[a-z]+|role|tabindex|title|alt|data|lang|style/,
+  ATTR_SECURE = /aria-[a-z]+|role|tabindex|title|alt|data-[\w\-]+|lang|style|maxlength|placeholder|pattern|type/,
   ID_PREFIX = "acfy-id-",
   n_label = 0,
   Doc = document;
