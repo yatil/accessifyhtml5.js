@@ -1,4 +1,6 @@
 /*
+ * The jQuery part of accessifyhtml5.js is now deprecated. It won’t get new features and may be removed soon.
+ *
  * Accessifyhtml5.js
  *
  * Source: https://github.com/yatil/accessifyhtml5.js
