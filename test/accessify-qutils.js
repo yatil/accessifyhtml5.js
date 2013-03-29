@@ -11,6 +11,9 @@ var q = {
   ///ex_ID: 'acfy-id-0',
 
   // Utilities: these need to exist after - see ::tearDown().
+  log: function (s) {
+    if (typeof console === 'object') console.log(arguments.length > 1 ? arguments : s)
+  },
   select: function (selector) {
     return document.querySelector(selector);
   },

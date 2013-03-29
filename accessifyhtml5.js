@@ -17,6 +17,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       'section'   :    {'role':          'region'        },
       '[required]':    {'aria-required': 'true'          }
   },
+  result = { ok:[], warn:[], fail:[] },
+  error = result.fail,
   fix, elems, attr, value, key, obj, i, mo, by_match, el_label,
   ATTR_SECURE = /aria-[a-z]+|role|tabindex|title|alt|data-[\w\-]+|lang|style|maxlength|placeholder|pattern|type/,
   ID_PREFIX = "acfy-id-",
@@ -54,8 +56,17 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       if (fixes.hasOwnProperty(fix)) {
 
         //Question: should we catch and report (or ignore) bad selector syntax?
-        elems = Doc.querySelectorAll(fix);
+        try {
+          elems = Doc.querySelectorAll(fix);
+        } catch (ex) {
+          error.push({ sel:fix, attr:null, val:null,
+            msg:"Invalid syntax for `document.querySelectorAll` function", ex:ex });
+        }
         obj = fixes[fix];
+
+        if (!elems || elems.length < 1) {
+          result.warn.push({ sel:fix, attr:null, val:null, msg:"Not found" });
+        }
 
         for (i = 0; i < elems.length; i++) {
 
@@ -66,20 +77,28 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
               value = obj[key];
 
               if (!attr.match(ATTR_SECURE)) {
-                //? console.log("Warning: attribute not allowed, ignoring: "+ attr); //Warn?
+                error.push({ sel:fix, attr:attr, val:null, msg:"Attribute not allowed", re:ATTR_SECURE });
                 continue;
               }
               if (!(typeof value).match(/string|number/)) {
-                //? console.log("Warning: value-type not allowed, ignoring: "+ typeof value); //Warn?
+                error.push({ sel:fix, attr:attr, val:value, msg:"Value-type not allowed" });
                 continue;
               }
 
               // Connect up 'aria-labelledby'. //Question: do we accept poor spelling/ variations?
               var by_match = attr.match(/(describ|label)l?edby/);
               if (by_match) {
-                el_label = Doc.querySelector(value); //Not: elems[i].querySel()
+                try {
+                  el_label = Doc.querySelector(value); //Not: elems[i].querySel()
+                } catch (ex) {
+                  error.push({ sel:fix, attr:attr, val:value,
+                    msg:"Invalid selector syntax (2) - see 'val'", ex:ex });
+                }
 
-                if (! el_label) { continue; /* Warn? */ }
+                if (! el_label) {
+                  error.push({ sel:fix, attr:attr, val:value, msg:"Labelledby ref not found - see 'val'", ex:ex });
+                  continue;
+                }
 
                 if (! el_label.id) {
                   el_label.id = ID_PREFIX + n_label;
@@ -93,8 +112,12 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
               if (!elems[i].hasAttribute(attr)) {
                 elems[i].setAttribute(attr, value);
-              }
 
+                result.ok.push({ sel:fix, attr:attr, val:value, msg:"Added" });
+              }
+              else {
+                result.warn.push({ sel:fix, attr:attr, val:value, msg:"Already present, skipped" });
+              }
             }
           }
 
@@ -103,4 +126,5 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       }
     } //End: for (fix in fixes)
   }
+  return result;
 };
