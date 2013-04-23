@@ -20,7 +20,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
   result = { ok:[], warn:[], fail:[] },
   error = result.fail,
   fix, elems, attr, value, key, obj, i, mo, by_match, el_label,
-  ATTR_SECURE = /aria-[a-z]+|role|tabindex|title|alt|data-[\w\-]+|lang|style|maxlength|placeholder|pattern|type/,
+  ATTR_SECURE = /aria-[a-z]+|role|tabindex|title|alt|data-[\w\-]+|lang|style|maxlength|placeholder|pattern|type|target|accesskey|longdesc/,
   ID_PREFIX = "acfy-id-",
   n_label = 0,
   Doc = document;
@@ -48,8 +48,15 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       }
     }
 
-    for (mo in more_fixes) {
-      fixes[mo] = more_fixes[mo];
+    // Either replace fixes...
+    if (typeof more_fixes._CONFIG_ === 'object'
+        && more_fixes._CONFIG_.ignore_defaults) {
+      fixes = more_fixes;
+    } else {
+      // ..Or concatenate - the default.
+      for (mo in more_fixes) {
+        fixes[mo] = more_fixes[mo];
+      }
     }
 
     for (fix in fixes) {
@@ -75,6 +82,10 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
               attr = key;
               value = obj[key];
+
+              if (attr.match(/_?note/)) { // Ignore notes/comments.
+                continue;
+              }
 
               if (!attr.match(ATTR_SECURE)) {
                 error.push({ sel:fix, attr:attr, val:null, msg:"Attribute not allowed", re:ATTR_SECURE });
@@ -126,5 +137,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
       }
     } //End: for (fix in fixes)
   }
+  result.input = fixes;
+
   return result;
 };
