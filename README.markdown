@@ -36,7 +36,7 @@ There are some options you’re able to specify as they can be on each web page 
 
 ## jQuery
 
-There is a jQuery variant of the script that is a bit smaller, so if you’re using jQuery anyway, go ahead.
+**Important:** From today on, 2013-03-27, the jQuery version of accessifyhtml5.js is deprecated. Use the vanilla JS version instead. (You can just replace the jQuery version with the non-jQuery JS file.)
 
 ```html
 <script src="accessifyhtml5.jquery.js"></script>
@@ -45,21 +45,20 @@ There is a jQuery variant of the script that is a bit smaller, so if you’re us
 
 ## CDN
 
-I’ve created a small CDN that should serve the JS file quite fast. I recommend to use the code here and copy it into your project’s JS file. Code:
+I’ve created a small CDN that should serve the JS file quite fast. I recommend to use the code here and copy it to the bottom of your project’s HTML file. Code:
 
 ```html
 <script src="//yatil-cdn.s3.amazonaws.com/accessifyhtml5.min.js"></script>
 <script>AccessifyHTML5();</script>
 ```
 
-or
-
-```html
-<script src="//yatil-cdn.s3.amazonaws.com/accessifyhtml5.jquery.min.js"></script>
-<script>AccessifyHTML5();</script>
-```
-
 ## Changelog
+
+### Version 2 (2013-03-27)
+
+* Thanks to [@nfreear](https://github.com/nfreear) for adding tests and HTML4 element support. Really a great extension.
+* The jQuery version is now deprecated.
+* The CDN version got updated, the jQuery version was replaced by the non-jQuery version. (They share the same API, so there shouldn’t be a problem here.)
 
 ### Version 1.5
 
@@ -79,17 +78,18 @@ or
 
 ## Acknowledgements:
 
-* @adickson for a really good non-jQuery solution
-* @stevefaulkner for [his work exploring html5 a11y](http://html5accessibility.com/)
-* @paddya91 for object notation
-* @ginader for reporting a typo
-* @webaxe for reporting an error
-* @divya for keeping me on track for a non-jQuery solution
-* @mathias for improving my javascript
+* [@nfreear](https://github.com/nfreear) for making this a really awesome project
+* [@adickson](https://github.com/adickson) for a really good non-jQuery solution
+* [@stevefaulkner](https://github.com/stevefaulkner) for [his work exploring html5 a11y](http://html5accessibility.com/)
+* [@paddya91](https://twitter.com/paddya91) for object notation
+* [@ginader](https://github.com/ginader) for reporting a typo
+* [@webaxe](https://twitter.com/webaxe) for reporting an error
+* [@divya](https://github.com/nimbupani) for keeping me on track for a non-jQuery solution
+* [@mathias](https://github.com/mathiasbynens) for improving my javascript
 
 ## Known Issues:
 
-* According to @jkiss, Window-Eyes 7.11 struggles with aria-roles and HTML5, this is nothing I can solve with this script but is a screen reader issue. See: https://twitter.com/#!/jkiss/status/5488643711967232
+* According to [@jkiss](https://twitter.com/jkiss), Window-Eyes 7.11 struggles with aria-roles and HTML5, this is nothing I can solve with this script but is a screen reader issue. See: https://twitter.com/jkiss/status/5488643711967232
 * Firefox adds roles by itself, so this script is not needed for those browsers. I haven’t found a way to detect if those implicit roles are set, so I can’t test that at the moment.
 
 ## License:
@@ -101,3 +101,4 @@ This project is [MIT licensed](http://outline.mit-license.org/).
 * Eric Eggert
 * Twitter: @yatil
 * Blog: http://yatil.net
+* Workshops: http://modernwebaccessibility.com
