@@ -107,7 +107,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
                 }
 
                 if (! el_label) {
-                  error.push({ sel:fix, attr:attr, val:value, msg:"Labelledby ref not found - see 'val'", ex:ex });
+                  error.push({ sel:fix, attr:attr, val:value, msg:"Labelledby ref not found - see 'val'" });
                   continue;
                 }
 
