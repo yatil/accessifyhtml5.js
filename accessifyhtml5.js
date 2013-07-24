@@ -49,7 +49,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 
     // Either replace fixes...
-    if (typeof more_fixes._CONFIG_ === 'object'
+    if (more_fixes && more_fixes._CONFIG_
         && more_fixes._CONFIG_.ignore_defaults) {
       fixes = more_fixes;
     } else {
