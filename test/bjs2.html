@@ -24,7 +24,7 @@
 <script>
 q.onload(function () {
 
-AccessifyHTML5(false, {
+q.res = AccessifyHTML5(false, {
   '#ou-org-header': {
     role: 'banner',
     'aria-label': 'Site logo',
@@ -44,6 +44,7 @@ AccessifyHTML5(false, {
     "aria-describedby": "#ou-org-footer p"
   },
 
+  // HTML5 form tests.
   "input#fmtest": {
     "type": "email",
     "placeholder": "you@example.org",
@@ -51,6 +52,9 @@ AccessifyHTML5(false, {
     "title": "Email input field - required",
     "style": "cursor:help"
   },
+
+  // Error tests.
+  "body:first": {},
 
   // Security tests.
   "body": {
@@ -63,6 +67,7 @@ AccessifyHTML5(false, {
   }
 });
 
+q.log(q.res);
 });
 </script>
 
