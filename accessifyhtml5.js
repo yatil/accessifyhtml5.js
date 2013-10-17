@@ -21,7 +21,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
   error = result.fail,
   fix, elems, attr, value, key, obj, i, mo, by_match, el_label,
   ATTR_SECURE = new RegExp("aria-[a-z]+|role|tabindex|title|alt|data-[\\w-]+|lang|"
-    + "style|maxlength|placeholder|pattern|type|target|accesskey|longdesc"),
+    + "style|maxlength|placeholder|pattern|required|type|target|accesskey|longdesc"),
   ID_PREFIX = "acfy-id-",
   n_label = 0,
   Doc = document;
