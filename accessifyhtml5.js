@@ -93,7 +93,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
                     re:ATTR_SECURE });
                 continue;
               }
-              if (!(typeof value).match(/string|number/)) {
+              if (!(typeof value).match(/string|number|boolean/)) {
                 error.push({ sel:fix, attr:attr, val:value, msg:"Value-type not allowed" });
                 continue;
               }
