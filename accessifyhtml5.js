@@ -61,6 +61,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 
     for (fix in fixes) {
+
+      if (fix.match(/^_(CONFIG|[A-Z]+)_/)) {
+        continue;  // Silently ignore.
+      }
+
       if (fixes.hasOwnProperty(fix)) {
 
         //Question: should we catch and report (or ignore) bad selector syntax?
