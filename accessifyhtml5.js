@@ -20,7 +20,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
   result = { ok:[], warn:[], fail:[] },
   error = result.fail,
   fix, elems, attr, value, key, obj, i, mo, by_match, el_label,
-  ATTR_SECURE = /aria-[a-z]+|role|tabindex|title|alt|data-[\w\-]+|lang|style|maxlength|placeholder|pattern|type|target|accesskey|longdesc/,
+  ATTR_SECURE = new RegExp("aria-[a-z]+|role|tabindex|title|alt|data-[\\w-]+|lang|"
+    + "style|maxlength|placeholder|pattern|required|type|target|accesskey|longdesc"),
   ID_PREFIX = "acfy-id-",
   n_label = 0,
   Doc = document;
@@ -60,6 +61,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 
     for (fix in fixes) {
+
+      if (fix.match(/^_(CONFIG|[A-Z]+)_/)) {
+        continue;  // Silently ignore.
+      }
+
       if (fixes.hasOwnProperty(fix)) {
 
         //Question: should we catch and report (or ignore) bad selector syntax?
@@ -88,10 +94,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
               }
 
               if (!attr.match(ATTR_SECURE)) {
-                error.push({ sel:fix, attr:attr, val:null, msg:"Attribute not allowed", re:ATTR_SECURE });
+                error.push({ sel:fix, attr:attr, val:null, msg:"Attribute not allowed",
+                    re:ATTR_SECURE });
                 continue;
               }
-              if (!(typeof value).match(/string|number/)) {
+              if (!(typeof value).match(/string|number|boolean/)) {
                 error.push({ sel:fix, attr:attr, val:value, msg:"Value-type not allowed" });
                 continue;
               }
@@ -107,7 +114,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
                 }
 
                 if (! el_label) {
-                  error.push({ sel:fix, attr:attr, val:value, msg:"Labelledby ref not found - see 'val'" });
+                  error.push({ sel:fix, attr:attr, val:value,
+                      msg:"Labelledby ref not found - see 'val'" });
                   continue;
                 }
 
