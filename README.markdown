@@ -102,3 +102,7 @@ This project is [MIT licensed](http://outline.mit-license.org/).
 * Twitter: @yatil
 * Blog: http://yatil.net
 * Workshops: http://modernwebaccessibility.com
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yatil/accessifyhtml5.js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
